@@ -66,7 +66,6 @@ to set-root
   set nodelist lput one-of nodes nodelist
   ask first nodelist [
     set color blue
-    set linked true
   ]
 end
 
@@ -100,7 +99,7 @@ to BFS
 
 end
 
-to disorder
+to edge-disorder
   repeat num-dis-edges [
     ask one-of nodes [
       create-link-with one-of other nodes
@@ -117,17 +116,44 @@ to disorder
   ]
 
   set-root
-  print nodelist
+end
+
+to node-disorder
+  create-nodes num-dis-nodes[
+    	set shape "circle"
+    	setxy random-pxcor random-pycor
+    	set color black
+    	set linked false
+  ]
+  
+  ask nodes with [count link-neighbors = 0][
+  	repeat num-dis-edges [
+      create-link-with one-of other nodes
+    ]
+  ]
+
+  ask links [
+    set visited false
+    set color black
+  ]
+
+  ask nodes [
+    set color black
+  ]
+
+
+  set-root
+  set i 0
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
 10
-647
-448
+639
+439
 -1
 -1
-13.0
+13
 1
 10
 1
@@ -145,13 +171,13 @@ GRAPHICS-WINDOW
 0
 1
 ticks
-30.0
+30
 
 BUTTON
-47
-68
-113
-101
+15
+15
+81
+48
 NIL
 layout
 T
@@ -165,10 +191,10 @@ NIL
 1
 
 BUTTON
-133
-61
-196
-94
+110
+20
+173
+53
 NIL
 setup
 NIL
@@ -182,10 +208,10 @@ NIL
 1
 
 BUTTON
-78
-145
-141
-178
+65
+75
+128
+108
 NIL
 go
 NIL
@@ -207,7 +233,7 @@ num-edges
 num-edges
 0
 100
-25.0
+25
 1
 1
 NIL
@@ -222,7 +248,7 @@ num-nodes
 num-nodes
 0
 100
-15.0
+15
 1
 1
 NIL
@@ -237,19 +263,19 @@ num-dis-edges
 num-dis-edges
 0
 10
-2.0
+2
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-49
-403
-126
-436
+30
+465
+121
+498
 NIL
-disorder
+edge-disorder
 NIL
 1
 T
@@ -271,6 +297,48 @@ count links
 1
 11
 
+BUTTON
+145
+465
+240
+495
+NIL
+node-disorder
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+SLIDER
+25
+405
+195
+438
+num-dis-nodes
+num-dis-nodes
+0
+15
+50
+1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+95
+135
+150
+180
+Nodes
+count nodes
+17
+1
+11
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -613,22 +681,22 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.1
+NetLogo 6.2.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 default
-0.0
--0.2 0 0.0 1.0
-0.0 1 1.0 0.0
-0.2 0 0.0 1.0
+0
+-0.2 0 0 1
+0 1 1 0
+0.2 0 0 1
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-0
+
 @#$#@#$#@
