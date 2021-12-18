@@ -2,13 +2,16 @@ breed [nodes node]
 
 nodes-own [active stopped colored]
 
-globals[pv i]
+globals[pv i num-edges msgs bits]
 
 to setup
   ca
   ask patches [
     set pcolor white
   ]
+  set num-edges num-nodes * num-edges-mul
+  set msgs 0
+  set bits 0
 
   setup-nodes
   setup-edges
@@ -63,6 +66,8 @@ to activate-nodes
       set color black
       set active false
     ][
+      set msgs msgs + count link-neighbors
+      set bits bits + count link-neighbors
       set active true
       set color green
     ]
@@ -158,7 +163,7 @@ BUTTON
 105
 NIL
 go
-NIL
+T
 1
 T
 OBSERVER
@@ -194,7 +199,7 @@ num-nodes
 num-nodes
 0
 100
-25.0
+15.0
 1
 1
 NIL
@@ -205,23 +210,34 @@ SLIDER
 182
 190
 215
-num-edges
-num-edges
+num-edges-mul
+num-edges-mul
 0
-100
-30.0
+15
+3.0
 1
 1
 NIL
 HORIZONTAL
 
 MONITOR
-50
+17
 244
-250
+84
 289
-NIL
-count nodes with [colored = true]
+Messages
+msgs
+17
+1
+11
+
+MONITOR
+121
+251
+178
+296
+Bits
+bits
 17
 1
 11
@@ -572,6 +588,21 @@ NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="Experiment" repetitions="5" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <metric>msgs</metric>
+    <metric>bits</metric>
+    <enumeratedValueSet variable="num-nodes">
+      <value value="10"/>
+      <value value="20"/>
+      <value value="50"/>
+      <value value="100"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default

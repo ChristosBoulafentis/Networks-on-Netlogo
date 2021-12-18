@@ -10,7 +10,7 @@ to setup
     set pcolor white
   ]
 
-  set colors [red blue green orange]
+  set colors [red blue green orange yellow]
 
   setup-nodes
   setup-edges
@@ -50,11 +50,11 @@ to go
   [tick]
   [stop]
 
-    activate-nodes
-    ask nodes with [stopped = false and active = true] [
+  activate-nodes
+  ask nodes with [stopped = false and active = true] [
     set color one-of colors
     check-node-colors
-    ]
+  ]
 
 end
 
@@ -149,7 +149,7 @@ num-nodes
 num-nodes
 0
 100
-50.0
+10.0
 1
 1
 NIL
@@ -163,8 +163,8 @@ SLIDER
 num-edges
 num-edges
 0
-100
-68.0
+150
+17.0
 1
 1
 NIL
@@ -176,7 +176,7 @@ INPUTBOX
 100
 327
 pa
-0.1
+0.9
 1
 0
 Number
@@ -197,24 +197,6 @@ NIL
 NIL
 NIL
 1
-
-PLOT
-768
-103
-968
-253
-pa-Time
-Time(ticks)
-Pa probabillity
-0.0
-10.0
-0.0
-1.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot pa"
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -562,6 +544,32 @@ NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="Color(nodes:5,edges:10)" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <steppedValueSet variable="pa" first="0.1" step="0.1" last="1"/>
+  </experiment>
+  <experiment name="Color(nodes:20,edges:30)" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <steppedValueSet variable="pa" first="0.1" step="0.1" last="1"/>
+  </experiment>
+  <experiment name="Color(nodes:50,edges:65)" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <steppedValueSet variable="pa" first="0.1" step="0.1" last="1"/>
+  </experiment>
+  <experiment name="Color(nodes:100,edges:125)" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <steppedValueSet variable="pa" first="0.1" step="0.1" last="1"/>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default

@@ -12,6 +12,7 @@ to setup
     set pcolor white
   ]
 
+
   setup-nodes
   setup-edges
   set nodelist []
@@ -50,6 +51,7 @@ end
 
 
 to go
+  tick
 
   BFS
 
@@ -106,16 +108,11 @@ to edge-disorder
     ]
   ]
 
-  ask links [
-    set visited false
-    set color black
+  ask links with [visited != True][
+    set visited False
   ]
 
-  ask nodes [
-    set color black
-  ]
-
-  set-root
+  set i 0
 end
 
 to node-disorder
@@ -125,35 +122,28 @@ to node-disorder
     	set color black
     	set linked false
   ]
-  
+
   ask nodes with [count link-neighbors = 0][
   	repeat num-dis-edges [
       create-link-with one-of other nodes
     ]
   ]
 
-  ask links [
-    set visited false
-    set color black
+  ask links with [visited != True][
+    set visited False
   ]
 
-  ask nodes [
-    set color black
-  ]
-
-
-  set-root
   set i 0
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
 10
-639
-439
+647
+448
 -1
 -1
-13
+13.0
 1
 10
 1
@@ -171,7 +161,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
-30
+30.0
 
 BUTTON
 15
@@ -232,8 +222,8 @@ SLIDER
 num-edges
 num-edges
 0
-100
-25
+125
+17.0
 1
 1
 NIL
@@ -241,14 +231,14 @@ HORIZONTAL
 
 SLIDER
 24
-297
+186
 196
-330
+219
 num-nodes
 num-nodes
 0
 100
-15
+10.0
 1
 1
 NIL
@@ -263,7 +253,7 @@ num-dis-edges
 num-dis-edges
 0
 10
-2
+2.0
 1
 1
 NIL
@@ -301,7 +291,7 @@ BUTTON
 145
 465
 240
-495
+498
 NIL
 node-disorder
 NIL
@@ -322,8 +312,8 @@ SLIDER
 num-dis-nodes
 num-dis-nodes
 0
-15
-50
+30
+7.0
 1
 1
 NIL
@@ -339,6 +329,7 @@ count nodes
 17
 1
 11
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -681,22 +672,41 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.0
+NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="Experiment" repetitions="5" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>ticks</metric>
+    <enumeratedValueSet variable="num-edges">
+      <value value="125"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-dis-edges">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-dis-nodes">
+      <value value="25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-nodes">
+      <value value="100"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
-0
--0.2 0 0 1
-0 1 1 0
-0.2 0 0 1
+0.0
+-0.2 0 0.0 1.0
+0.0 1 1.0 0.0
+0.2 0 0.0 1.0
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-
+0
 @#$#@#$#@
